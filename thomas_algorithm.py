@@ -50,6 +50,7 @@ if __name__ == "__main__":
     print("Ax:", y1)
     print('-'*70)
     
+    # Not ideal solution
     print("Solution of equation #2")
     x2 = tridiagonalSolver(a2, d2)
     print("x:", x2)
