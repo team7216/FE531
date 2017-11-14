@@ -79,16 +79,20 @@ class PlainVanillaOption:
         #Boundary Setting
         mesh[:,0] = self.payoff_tr(x_range, 0)
         if self.optionType == 1:
-            mesh[-1,1:] = np.exp(0.5 * (self.k2 + 1) * xmax + 0.25 * (self.k2 + 1) ** 2 * t_range[1:])   
+            mesh[-1,1:] = np.exp(0.5 * (self.k2 + 1) * xmax + \
+                                0.25 * (self.k2 + 1) ** 2 * t_range[1:])   
         else:
-            mesh[0,1:] = np.exp(0.5 * (self.k2 - 1) * xmin + 0.25 * (self.k2 - 1) ** 2 * t_range[1:])
+            mesh[0,1:] = np.exp(0.5 * (self.k2 - 1) * xmin + \
+                                0.25 * (self.k2 - 1) ** 2 * t_range[1:])
         
         # Solve PDE by recursion
         for j in range(1, m):
             for i in range(1, n-1):
                 mesh[i][j] = mesh[i][j-1] + alpha * (mesh[i+1][j-1] - 2*mesh[i][j-1] + mesh[i-1][j-1])
-    
-        price = mesh[:,-1] * self.strike * np.exp(-0.5 * (self.k2 - 1) * x_range - (0.25 * (self.k2 - 1) ** 2 + self.k1) * self.tau)
+        
+        #변환했던 변수를 다시 돌려놓음
+        price = mesh[:,-1] * self.strike * np.exp(-0.5 * (self.k2 - 1) * x_range - \
+                                (0.25 * (self.k2 - 1) ** 2 + self.k1) * self.tau)
         return spot_range, spot_range[x_idx], price, price[x_idx], alpha
         
         
