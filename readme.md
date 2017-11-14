@@ -6,4 +6,4 @@
 
 즉, 역할을 분담하여 각자가 코드를 짠 뒤, 이를 병합하여(이 과정에서 일어나는 충돌을 해결하고) master branch에 최종 결과물을 올리는 방식
 
-주의: Local branch와 remote branch의 이름은 같게 설정해주세요. (그래야 잡다한 오류가 안나고 편함)
+주의: Local branch와 remote branch의 이름은 같게 설정해주세요. (master는 master, testing은 testing으로. 그래야 잡다한 오류가 안나고 편함)
