@@ -21,12 +21,14 @@ def initial_mesh(minvalue, maxvalue, num, coupon, barrier):
     num: mesh를 쪼개는 개수
     coupon: 시간 순서대로 상환시 지급하는 쿠폰(ex: [0.025, 0.05, 0.075, 0.1, 0.125, 0.15])
     barrier: knock-in 배리어
+    
+    변수 coupon과 barrier는 class를 만들 때 멤버 변수화될 것임
     '''
     
     price_range = np.linspace(minvalue, maxvalue, num)
-    x, y = np.meshgrid(price_range, price_range)
-    mesh = np.where(x > y, y, x)
-    mesh = np.where(mesh > 100 * barrier, 100 * (1 + coupon[-1]), mesh)
+    x, y = np.meshgrid(price_range, price_range)    #(x와 y의 (num * num) matrix를 만듬)
+    mesh = np.where(x > y, y, x)                    #x와 y중 mininum을 component로 갖는 행렬
+    mesh = np.where(mesh > 100 * barrier, 100 * (1 + coupon[-1]), mesh)     #barrier보다 크면 쿠폰 지급, 아닌 경우 원금 손실
     
     return mesh
 
